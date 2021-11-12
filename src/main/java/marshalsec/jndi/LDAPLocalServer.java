@@ -17,14 +17,14 @@ import java.io.FileInputStream;
 import java.net.InetAddress;
 import java.util.UUID;
 
-public class LDAPLocalRefServer {
+public class LDAPLocalServer {
     private static final String LDAP_BASE = "dc=example,dc=com";
 
     public static void main(String[] args) {
         int port = 1389;
         // args = new String[] {"D:\\Project\\CommonsCollections\\cc6"};
         if ( args.length < 1 ) {
-            System.err.println(LDAPLocalRefServer.class.getSimpleName() + " <gadgets_filepath> [<port>]");
+            System.err.println(LDAPLocalServer.class.getSimpleName() + " <gadgets_filepath> [<port>]");
             System.exit(-1);
         }
         else if ( args.length > 1 ) {
@@ -41,7 +41,7 @@ public class LDAPLocalRefServer {
                     SocketFactory.getDefault(),
                     (SSLSocketFactory) SSLSocketFactory.getDefault()));
 
-            config.addInMemoryOperationInterceptor(new LDAPLocalRefServer.OperationInterceptor(args[0]));
+            config.addInMemoryOperationInterceptor(new LDAPLocalServer.OperationInterceptor(args[0]));
             InMemoryDirectoryServer ds = new InMemoryDirectoryServer(config);
             System.out.println("Listening on 0.0.0.0:" + port); //$NON-NLS-1$
             ds.startListening();
